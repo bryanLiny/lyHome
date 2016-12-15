@@ -36,10 +36,8 @@ module.exports = {
 						msg: '增加成功'
 					};
 				}
-
 				// 以json形式，把操作结果返回给前台页面
 				jsonWrite(res, result);
-
 				// 释放连接 
 				connection.release();
 			});
@@ -96,7 +94,6 @@ module.exports = {
 			connection.query($sql.queryById, id, function(err, result) {
 				jsonWrite(res, result);
 				connection.release();
-
 			});
 		});
 	},
@@ -104,7 +101,7 @@ module.exports = {
 		pool.getConnection(function(err, connection) {
 			connection.query($sql.queryAll, function(err, result) {
 				jsonWrite(res, result);
-				console.log(result);
+				//console.log(result);
 				connection.release();
 			});
 		});

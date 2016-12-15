@@ -14,5 +14,7 @@ node express project
   1）npm start (默认端口3000)
   
 3、参考文章：http://www.alloyteam.com/2015/03/sexpressmysql/
-  
+
+4、添加grunt打包工具（本地安装npm install -g grunt-cli）
+  
   

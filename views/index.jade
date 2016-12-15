@@ -1,7 +1,19 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  div#container
-    p.who 你好
+  div.container-fluid
+    h1= title
+    p Welcome to #{title}
+    div.row
+      accordion(:one-at-atime='checked' type='info')
+        panel(is-open type='primary')
+          strong(slot='header')
+            u Panel #1
+        panel(header='Panel #2')
+          p sadfsafasfsdf
+
+        panel(header='Panel #3')
+          p qetqertqetqetet
+
+        panel(header='Panel #4')
+          p zxczxvzxvzxvzxv

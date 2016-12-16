@@ -101,7 +101,7 @@ module.exports = {
 		pool.getConnection(function(err, connection) {
 			connection.query($sql.queryAll, function(err, result) {
 				jsonWrite(res, result);
-				//jconsole.log(result);
+				
 				connection.release();
 			});
 		});

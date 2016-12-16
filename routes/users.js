@@ -5,7 +5,7 @@ var userDao = require('../dao/userDao');
 
 /* 获取用户 */
 router.get('/', function(req, res, next) {
-	res.send('respond with a resource');
+	res.render('users');
 });
 
 /* 新增用户 */

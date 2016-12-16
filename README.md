@@ -1,5 +1,5 @@
 # lyHome
-node express+mysql+VueStrap project
+node express+mysql+React project
 
 使用express命令创建node web 项目
 
@@ -17,6 +17,7 @@ node express+mysql+VueStrap project
 
 4、添加grunt打包工具（本地安装npm install -g grunt-cli）
 
-5、添加VueStrap（Vue 和 Bootstrap 的控件包，no Jquery,no bootstrap.js, no 3rd part js plugin）http://yuche.github.io/vue-strap/
+5、添加React+Bootstrap
+##//（最初：VueStrap: Vue 和 Bootstrap 的控件包，no Jquery,no bootstrap.js, no 3rd part js plugin）http://yuche.github.io/vue-strap/
   
   

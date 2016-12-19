@@ -30,14 +30,16 @@ module.exports = {
 			// 建立连接，向表中插入值
 			// 'INSERT INTO user(id, name, age) VALUES(0,?,?)',
 			connection.query($sql.insert, [param.name, param.age], function(err, result) {
-				if (result) {
-					result = {
-						code: 200,
-						msg: '增加成功'
-					};
+				// 使用页面进行跳转提示
+				if (result.affectedRows > 0) {
+					res.render('suc', {
+						result: result
+					}); // 第二个参数可以直接在jade中使用
+				} else {
+					res.render('fail', {
+						result: result
+					});
 				}
-				// 以json形式，把操作结果返回给前台页面
-				jsonWrite(res, result);
 				// 释放连接 
 				connection.release();
 			});

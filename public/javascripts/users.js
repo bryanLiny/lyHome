@@ -20,11 +20,19 @@ var UserListView = React.createClass({
   	},
 
   	handClick:function(userId){
+  		var userInfoBox = document.getElementById('userInfo');
+  		// 重新渲染数据DOM
+  		// React 数据并非双向绑定框架，数据改变，不会重新渲染DOM
+  		// React 根据对比新旧树的结构变化，两个树一样，则不会重新渲染了
+  		// innerHTML = '' 是为了简单的能在user信息改变时，数据重新填充
+  		// 网上有用reactMixin插件解决数据绑定问题，但这里简单实现就未采取该方法
+  		// ES6 使用 LinkedStateMixin 解决
+  		userInfoBox.innerHTML = "";
   		$.get('/users/query?id='+userId, function(data) {
   			var userInfo = data[0];
   			ReactDOM.render(
   				<UserInfoView userInfo={userInfo} />,
-  				document.getElementById('userInfo')
+  				userInfoBox
   			);
   		});
   	},
@@ -43,28 +51,18 @@ var UserListView = React.createClass({
 });
 
 var UserInfoView = React.createClass({
-	handChangeName:function(event){
-		// this.setState({
-		// 	name = event.target.value;
-		// });
-	},
-	handChangeAge:function(event){
-		// this.setState({
-		// 	age = event.target.value;
-		// });
-	},
 	render:function(){
-		var user = this.props.userInfo; 
+		var user = this.props.userInfo || {};
 		return (
-			<form role="form" action='/users/updateUser'>
-				<input type='hidden' value={user.id} />
+			<form role="form" method='POST' action='/users/updateUser'>
+				<input type='hidden' defaultValue={user.id} />
 				<div className="form-group">
-					<label htmlFor="username">Email address</label>
-					<input onChange={this.handChangeName} type="text" className="form-control" value={user.name} id="username" placeholder="UserName" />
+					<label htmlFor="username">用户名：</label>
+					<input type="text" className="form-control" defaultValue={user.name} id="username" placeholder="UserName" />
 				</div>
 				<div className="form-group">
-					<label htmlFor="userage">Password</label>
-					<input onChange={this.handChangeAge} type="text" className="form-control" value={user.age} id="userage" placeholder="UserAge" />
+					<label htmlFor="userage">年龄：</label>
+					<input type="text" className="form-control" defaultValue={user.age} id="userage" placeholder="UserAge" />
 				</div>
 				<div className="form-group">
 					<button type='submit' className='btn btn-success'>提交</button>

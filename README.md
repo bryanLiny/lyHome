@@ -18,6 +18,5 @@ node express+mysql+React project
 4、添加grunt打包工具（本地安装npm install -g grunt-cli）
 
 5、添加React+Bootstrap
-##//（最初：VueStrap: Vue 和 Bootstrap 的控件包，no Jquery,no bootstrap.js, no 3rd part js plugin）http://yuche.github.io/vue-strap/
   
   

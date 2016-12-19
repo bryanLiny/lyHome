@@ -30,7 +30,7 @@ var UserListView = React.createClass({
   		// ES6 使用 LinkedStateMixin 解决
   		userInfoBox.innerHTML = "";
   		btnGroupBox.innerHTML = "";
-  		$.get('/users/query?id='+userId, function(data) {
+  		$.get('/users/query/'+userId, function(data) {
   			var userInfo = data[0];
   			ReactDOM.render(
   				<UserInfoEditView userInfo={userInfo} />,

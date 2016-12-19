@@ -20,7 +20,7 @@ router.get('/queryAll', function(req, res, next) {
 });
 
 // 查找ById 
-router.get('/query', function(req, res, next) {
+router.get('/query/:id', function(req, res, next) {
 	userDao.queryById(req, res, next);
 });
 

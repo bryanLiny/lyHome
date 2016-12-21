@@ -25,9 +25,11 @@ var UserListView = React.createClass({
   		// 重新渲染数据DOM
   		// React 数据并非双向绑定框架，数据改变，不会重新渲染DOM
   		// React 根据对比新旧树的结构变化，两个树一样，则不会重新渲染了
-  		// userInfoBox.innerHTML = '' 是为了简单的能在user信息改变时，数据重新填充
-  		// 网上有用reactMixin插件解决数据绑定问题，但这里简单实现就未采取该方法
-  		// ES6 使用 LinkedStateMixin 解决
+  		// Form表单中input框并未使用value属性，而以defaultValue取代，
+  		// 原因是为了避免使用value属性时，需要给input框添加onChange事件
+  		// 这里userInfoBox.innerHTML = ''是为了简单的能在user信息改变时，数据重新填充
+  		// 1、网上有用reactMixin插件解决数据绑定问题，但这里简单实现就未采取该方法
+  		// 2、ES6 使用 LinkedStateMixin 解决
   		this.state.userInfoBox.innerHTML = "";
   		this.state.btnGroupBox.innerHTML = "";
   		var userInfo = {};

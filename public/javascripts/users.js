@@ -2,7 +2,9 @@ var UserListView = React.createClass({
 
 	getInitialState:function(){
 		return {
-			userList : []
+			userList : [],
+			userInfoBox: document.getElementById('userInfo'),
+  			btnGroupBox: document.getElementById('btnGroup')
 		}
 	},
 
@@ -20,33 +22,45 @@ var UserListView = React.createClass({
   	},
 
   	clickUserDetail:function(userId){
-  		var userInfoBox = document.getElementById('userInfo'),
-  			btnGroupBox = document.getElementById('btnGroup');
   		// 重新渲染数据DOM
   		// React 数据并非双向绑定框架，数据改变，不会重新渲染DOM
   		// React 根据对比新旧树的结构变化，两个树一样，则不会重新渲染了
   		// userInfoBox.innerHTML = '' 是为了简单的能在user信息改变时，数据重新填充
   		// 网上有用reactMixin插件解决数据绑定问题，但这里简单实现就未采取该方法
   		// ES6 使用 LinkedStateMixin 解决
-  		userInfoBox.innerHTML = "";
-  		btnGroupBox.innerHTML = "";
-  		$.get('/users/query/'+userId, function(data) {
-  			var userInfo = data[0];
+  		this.state.userInfoBox.innerHTML = "";
+  		this.state.btnGroupBox.innerHTML = "";
+  		var userInfo = {};
+  		this.solvePromise(userId,userInfo).then(function(res){
   			ReactDOM.render(
-  				<UserInfoEditView userInfo={userInfo} />,
-  				userInfoBox
+  				<UserInfoEditView userInfo={res} />,
+  				document.getElementById('userInfo')// 这里无法使用this.state.userInfoBox
   			);
+  		});
+  		// $.get('/users/query/'+userId, function(data) {
+  		// 	var userInfo = data[0];
+  		// 	ReactDOM.render(
+  		// 		<UserInfoEditView userInfo={userInfo} />,
+  		// 		document.getElementById('userInfo')// 这里无法使用this.state.userInfoBox
+  		// 	);
+  		// });
+  	},
+
+  	solvePromise: function(userId,userInfo){
+  		return new Promise(function(resolve,reject){
+  			$.get('/users/query/'+userId, function(data) {
+	  			var userInfo = data[0];
+	  			resolve(userInfo);
+	  		});
   		});
   	},
 
   	clickAddUser: function(){
-  		var userInfoBox = document.getElementById('userInfo'),
-  			btnGroupBox = document.getElementById('btnGroup');
   		ReactDOM.render(
 			<UserInfoAddView />,
-			userInfoBox
+			this.state.userInfoBox
 		);
-		btnGroupBox.innerHTML = '';
+		this.state.btnGroupBox.innerHTML = '';
   	},
 
 	render: function(){

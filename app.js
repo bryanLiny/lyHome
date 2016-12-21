@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var comment = require('./routes/comment');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 引入中间件
 app.use('/', routes);
 app.use('/users', users);
+app.use('/comment', comment);
 
 // 处理404错误
 app.use(function(req, res, next) {
